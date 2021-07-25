@@ -2,7 +2,7 @@
 // @name        Empornium Nice Notifications
 // @description Clickable notification alerts
 // @namespace   Empornium Scripts
-// @version     1.0.0
+// @version     1.0.1
 // @author      vandenium
 // @grant       none
 // @include     /^https://www\.empornium\.(me|sx|is)\/*/
@@ -10,14 +10,16 @@
 // ==/UserScript==
 
 // Changelog:
+// Version 1.0.1
+//  - Bugfix: Fix issue of applying to only first alert.
 // Version 1.0.0
 //  - Initial version.
 // Todo:
 
-const alertBarContainer = document.querySelector('div.alertbar');
+const alertBarContainers = document.querySelectorAll('div#alerts div.alertbar');
 
 // If no alertbar, exit.
-if (alertBarContainer) {
+if (alertBarContainers.length > 0) {
   const alertsContainer = document.querySelector('div#alerts');
 
   // Return individual RGB values from rgb string.
@@ -31,7 +33,7 @@ if (alertBarContainer) {
   }
 
   // Preserve notification bar color from style sheet.
-  const computedStyle = window.getComputedStyle(alertBarContainer);
+  const computedStyle = window.getComputedStyle(alertBarContainers[0]);
   const originalAlertBackgroundColor = computedStyle.backgroundColor;
   const originalAlertColor = computedStyle.color;
 
@@ -50,8 +52,11 @@ if (alertBarContainer) {
   document.querySelector('head').appendChild(style);
 
   // Update notification alerts style
-  alertBarContainer.classList.remove('alertbar');
-  const alerts = alertBarContainer.querySelectorAll('a');
+  alertBarContainers.forEach(alertBar => {
+    alertBar.classList.remove('alertbar');
+  })
+
+  const alerts = alertsContainer.querySelectorAll('a');
 
   alerts.forEach(alert => {
     alert.style.cssText = `
