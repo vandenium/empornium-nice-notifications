@@ -21,9 +21,12 @@
 const alertBarContainers = document.querySelectorAll('div#alerts div.alertbar');
 const  isSubscriptionNotifications = () => {
   const el = document.querySelector('a.new-subscriptions');
-  const elTextMatch = /\(([0-9]+)\)/.exec(el.textContent);
-  if (elTextMatch) {
-    return elTextMatch[1]
+  if (el) {
+    const elTextMatch = /\(([0-9]+)\)/.exec(el.textContent);
+    if (elTextMatch) {
+      return elTextMatch[1];
+    }
+    return false;
   }
   return false;
 };
@@ -40,6 +43,10 @@ if (subscriptionNotificationCount) {
       background-color: #eee;
     }
 
+    div#menu {
+      margin-bottom: 2px;
+    }
+
     div.subscription-alerts {
       margin: 0 auto;
       text-align: center;
@@ -54,9 +61,9 @@ if (subscriptionNotificationCount) {
       display: inline-block;
       vertical-align: middle;
       text-decoration: none;
-      line-height: 25px;
+      line-height: 20px;
       border-radius: 25px;
-      margin: 5px;
+      margin: 1px;
       font-weight: bold;
     }
   `;
@@ -102,25 +109,21 @@ if (alertBarContainers.length > 0) {
   const originalAlertColor = computedStyle.color;
 
   const rgb = getRGB(originalAlertBackgroundColor);
-  const hoverAlertBackgroundColor = `rgb(${rgb.red * 1 - 50}, ${rgb.green * 1 - 50}, ${rgb.blue * 1 - 50})`;
+  const hoverAlertBackgroundColor = `rgb(${rgb.red * 1 - 20}, ${rgb.green * 1 - 20}, ${rgb.blue * 1 - 20})`;
 
   var css = `
     div#alerts a:hover { 
       background-color: ${hoverAlertBackgroundColor} !important;
     }
 
-    div.subscription-alerts a:hover { 
-      background-color: #eee;
-    }
-
-    div#alerts a, div.subscription-alerts a {
+    div#alerts a {
       width: 100%;
       display: inline-block;
       vertical-align: middle;
       text-decoration: none;
-      line-height: 25px;
+      line-height: 20px;
       border-radius: 25px;
-      margin: 5px;
+      margin: 1px;
       font-weight: bold;
     }
     `;
