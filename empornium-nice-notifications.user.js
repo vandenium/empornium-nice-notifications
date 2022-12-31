@@ -2,7 +2,7 @@
 // @name        Empornium Nice Notifications
 // @description Clickable notification alerts
 // @namespace   Empornium Scripts
-// @version     1.0.1
+// @version     1.2.0
 // @author      vandenium
 // @grant       none
 // @include     /^https://www\.empornium\.(me|sx|is)\/*/
@@ -10,6 +10,10 @@
 // ==/UserScript==
 
 // Changelog:
+// Version 1.2.0
+//  - Removing Forum Notifications update in 1.1.0
+// Version 1.1.0
+//  - Add forum subscription notifications
 // Version 1.0.1
 //  - Bugfix: Fix issue of applying to only first alert.
 // Version 1.0.0
